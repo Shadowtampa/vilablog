@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// @ts-ignore
 import styles from "./LandingStyles.module.scss";
 
 
@@ -17,7 +16,7 @@ interface IArticle {
   title: string;
   updated: string;
   url: string;
-  images: any;
+  images: [];
 }
 
 interface ILanding {
@@ -28,7 +27,7 @@ export const Landing = ({ articles }: ILanding) => {
 
   console.log(articles)
 
-  const [currentArticle, setcurrentArticle] = useState<any>(null);
+  const [currentArticle, setcurrentArticle] = useState<IArticle>();
   const [articleList, setArticleList] = useState<IArticle[]>([]);
 
   const handleChangeArticle = (id: string) => {
@@ -42,9 +41,11 @@ export const Landing = ({ articles }: ILanding) => {
 
   }
 
+  useEffect(() => console.log(currentArticle))
+
   useEffect(() => {
     articles && setArticleList(articles)
-  });
+  }, [articles]);
 
   return (
     <>
@@ -53,7 +54,7 @@ export const Landing = ({ articles }: ILanding) => {
           ? <div className={styles.container}>
             <div className={styles.mainArticle}>
 
-              <img src={currentArticle !== null ? currentArticle.images && currentArticle.images[0].url : articleList[0].images && articleList[0].images[0].url} />
+              <img src={currentArticle !== undefined ? currentArticle.images && currentArticle.images[0].url : articleList[0].images && articleList[0].images[0].url} />
 
 
               <span className={styles.title}>{currentArticle ? currentArticle.title : articleList[0].title}</span>
@@ -70,7 +71,7 @@ export const Landing = ({ articles }: ILanding) => {
 
             <span className={styles.allArticlesTitle}>Outros Artigos</span>
             <div className={styles.columnWrapper}>
-              {currentArticle === null ? (
+              {currentArticle === undefined ? (
                 // Se currentArticle for null, exiba todos os artigos
                 articleList.map(article => (
                   <div className={styles.article} key={article.id}>
@@ -80,7 +81,7 @@ export const Landing = ({ articles }: ILanding) => {
                 ))
               ) : (
                 // Se currentArticle não for null, exiba apenas dois artigos de forma aleatória
-                Array.from({ length: 2 }).map((_, index) => {
+                Array.from({ length: 2 }).map(() => {
                   const randomIndex = Math.floor(Math.random() * articleList.length);
                   const article = articleList[randomIndex];
 
