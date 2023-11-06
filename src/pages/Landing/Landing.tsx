@@ -54,7 +54,7 @@ export const Landing = ({ articles }: ILanding) => {
           ? <div className={styles.container}>
             <div className={styles.mainArticle}>
 
-              <img src={currentArticle !== undefined ? currentArticle.images && currentArticle.images[0].url : articleList[0].images && articleList[0].images[0].url} />
+              <img src={currentArticle !== undefined ? currentArticle && currentArticle.images[0].url : articleList[0].images && articleList[0].images[0].url} />
 
 
               <span className={styles.title}>{currentArticle ? currentArticle.title : articleList[0].title}</span>
