@@ -54,7 +54,15 @@ export const Landing = ({ articles }: ILanding) => {
           ? <div className={styles.container}>
             <div className={styles.mainArticle}>
 
-              <img src={currentArticle !== undefined ? currentArticle && currentArticle.images[0].url : articleList[0].images && articleList[0].images[0].url} />
+              {(((currentArticle || articleList[0]).images as { url: string }[]) || []).length > 0
+                ? (
+                  <img src={((currentArticle || articleList[0]).images as { url: string }[])[0].url} />
+                  ) 
+                : (
+                  <div></div>
+                )}
+
+
 
 
               <span className={styles.title}>{currentArticle ? currentArticle.title : articleList[0].title}</span>
@@ -75,7 +83,7 @@ export const Landing = ({ articles }: ILanding) => {
                 // Se currentArticle for null, exiba todos os artigos
                 articleList.map(article => (
                   <div className={styles.article} key={article.id}>
-                    {article.images && <img src={article.images[0].url} alt={article.title} />}
+                      {((article.images as { url: string }[]) || []).length > 0 && <img src={(article.images as { url: string }[])[0].url} alt={article.title} />}
                     <span className={styles.articleTitle} onClick={() => handleChangeArticle(article.id)}>{article.title}</span>
                   </div>
                 ))
@@ -87,7 +95,7 @@ export const Landing = ({ articles }: ILanding) => {
 
                   return (
                     <div className={styles.article} key={article.id}>
-                      {article.images && <img src={article.images[0].url} alt={article.title} />}
+                      {((article.images as { url: string }[]) || []).length > 0 && <img src={(article.images as { url: string }[])[0].url} alt={article.title} />}
                       <span className={styles.articleTitle} onClick={() => handleChangeArticle(article.id)}>{article.title}</span>
                     </div>
                   );
