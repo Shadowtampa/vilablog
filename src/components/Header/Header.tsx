@@ -12,8 +12,8 @@ export const Header = ({page} : IHeader) => {
                 VILABLOG
             </span>
             <div className={styles.links}>
-                <a href='#' className={ page === "Blog" && styles.ativo }>Blog</a>
-                <a href='https://github.com/Shadowtampa/' className={ page === "Github" && styles.ativo }>Github</a>
+                <a href='#' className={ page === "Blog" ? styles.ativo : "" }>Blog</a>
+                <a href='https://github.com/Shadowtampa/'>Github</a>
             </div>
         </header>
     )
