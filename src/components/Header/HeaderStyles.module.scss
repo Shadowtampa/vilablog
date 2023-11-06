@@ -1,0 +1,47 @@
+
+
+.component {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 30px 50px 40px 50px;
+
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.16);
+  }
+
+  .title{
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 40px;
+
+    padding: 0;
+  }
+
+  
+  .links{
+    display: flex;
+    flex-direction: row;
+
+
+  }
+
+  .links a {
+    padding: 0 10px 10px 10px;
+
+    font-weight: bold;
+    color: black;
+
+    text-decoration: none;
+
+  }
+
+  .ativo {
+
+    border-bottom: 1px black solid;
+  }
+
+  
+
+  
