@@ -27,7 +27,6 @@ const App = () => {
       <Header page="Blog" />
       {data && <Landing articles={data} />}
 
-      <footer>footer</footer>
     </>
   )
 }
