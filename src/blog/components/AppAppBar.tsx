@@ -12,7 +12,8 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
-import Sitemark from "./SitemarkIcon";
+import { LanguageModeIconDropdown } from "../../shared-theme/LanguageModeIconDropdown";
+import { useTranslation } from "react-i18next";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -31,6 +32,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function AppAppBar() {
+  const { t } = useTranslation();
+
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -55,32 +58,10 @@ export default function AppAppBar() {
           >
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button variant="text" color="info" size="small">
-                Features
+                {t("Posts")}
               </Button>
               <Button variant="text" color="info" size="small">
-                Testimonials
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Highlights
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Pricing
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                sx={{ minWidth: 0 }}
-              >
-                FAQ
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                sx={{ minWidth: 0 }}
-              >
-                Blog
+                {t("About")}
               </Button>
             </Box>
           </Box>
@@ -91,7 +72,8 @@ export default function AppAppBar() {
               alignItems: "center",
             }}
           >
-          <ColorModeIconDropdown />
+            <LanguageModeIconDropdown />
+            <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 1 }}>
             <ColorModeIconDropdown size="medium" />
