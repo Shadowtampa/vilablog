@@ -15,6 +15,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
+import { useTranslation } from 'react-i18next';
 
 const cardData = [
   {
@@ -144,12 +145,15 @@ function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
 }
 
 export function Search() {
+
+  const { t } = useTranslation();
+
   return (
     <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
       <OutlinedInput
         size="small"
         id="search"
-        placeholder="Search…"
+        placeholder= {`${t('search')}...` as string} 
         sx={{ flexGrow: 1 }}
         startAdornment={
           <InputAdornment position="start" sx={{ color: 'text.primary' }}>
@@ -165,6 +169,9 @@ export function Search() {
 }
 
 export default function MainContent() {
+
+  const { t } = useTranslation();
+
   const [focusedCardIndex, setFocusedCardIndex] = React.useState<number | null>(
     null,
   );
@@ -187,7 +194,7 @@ export default function MainContent() {
         <Typography variant="h1" gutterBottom>
           Blog
         </Typography>
-        <Typography>Stay in the loop with the latest about our products</Typography>
+        <Typography>{t('welcome')}</Typography>
       </div>
       <Box
         sx={{
@@ -214,52 +221,6 @@ export default function MainContent() {
           overflow: 'auto',
         }}
       >
-        <Box
-          sx={{
-            display: 'inline-flex',
-            flexDirection: 'row',
-            gap: 3,
-            overflow: 'auto',
-          }}
-        >
-          <Chip onClick={handleClick} size="medium" label="All categories" />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Company"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Product"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Design"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Engineering"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-        </Box>
         <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
