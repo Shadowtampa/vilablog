@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -183,11 +182,7 @@ export default function MainContent() {
   const handleBlur = () => {
     setFocusedCardIndex(null);
   };
-
-  const handleClick = () => {
-    console.info('You clicked the filter chip.');
-  };
-
+  
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <div>
