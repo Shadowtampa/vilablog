@@ -76,6 +76,7 @@ export default function AppAppBar() {
             <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 1 }}>
+            <LanguageModeIconDropdown size="medium" />
             <ColorModeIconDropdown size="medium" />
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
