@@ -5,6 +5,7 @@ export const bloggerInstance = axios.create({
   timeout: 3000,
   params: {
     key: import.meta.env.VITE_BLOGGER_API_KEY,
-    maxResults: 10
+    maxResults: 10,
+    fields: "kind,items(title,content,updated)"
   },
 });
