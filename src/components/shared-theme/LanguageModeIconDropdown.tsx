@@ -7,8 +7,8 @@ import LanguageIcon from "@mui/icons-material/Language";
 
 import { useTranslation } from "react-i18next";
 
-import FlagPT from "../assets/br.svg";
-import FlagEN from "../assets/us.svg";
+import FlagPT from "../../assets/br.svg";
+import FlagEN from "../../assets/us.svg";
 
 export function LanguageModeIconDropdown(props: IconButtonOwnProps) {
   const { i18n } = useTranslation();
