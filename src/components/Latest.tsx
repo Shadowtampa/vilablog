@@ -1,92 +1,64 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
+import { AxiosResponse } from 'axios';
+import { bloggerInstance } from '../services/api';
 
-const articleInfo = [
+const articleInfoBkp = [
   {
-    tag: 'Engineering',
     title: 'The future of AI in software engineering',
     description:
       'Artificial intelligence is revolutionizing software engineering. Explore how AI-driven tools are enhancing development processes and improving software quality.',
-    authors: [
-      { name: 'Remy Sharp', avatar: '/static/images/avatar/1.jpg' },
-      { name: 'Travis Howard', avatar: '/static/images/avatar/2.jpg' },
-    ],
+    updated: "18/10/2025"
   },
   {
-    tag: 'Product',
     title: 'Driving growth with user-centric product design',
     description:
-      'Our user-centric product design approach is driving significant growth. Learn about the strategies we employ to create products that resonate with users.',
-    authors: [{ name: 'Erica Johns', avatar: '/static/images/avatar/6.jpg' }],
+      'Our user-centric product design approach is driving significant growth. Learn about the strategies we employ to create products that resonate with users.'
   },
   {
-    tag: 'Design',
     title: 'Embracing minimalism in modern design',
     description:
-      'Minimalism is a key trend in modern design. Discover how our design team incorporates minimalist principles to create clean and impactful user experiences.',
-    authors: [{ name: 'Kate Morrison', avatar: '/static/images/avatar/7.jpg' }],
+      'Minimalism is a key trend in modern design. Discover how our design team incorporates minimalist principles to create clean and impactful user experiences.'
   },
   {
-    tag: 'Company',
     title: 'Cultivating a culture of innovation',
     description:
-      'Innovation is at the heart of our company culture. Learn about the initiatives we have in place to foster creativity and drive groundbreaking solutions.',
-    authors: [{ name: 'Cindy Baker', avatar: '/static/images/avatar/3.jpg' }],
+      'Innovation is at the heart of our company culture. Learn about the initiatives we have in place to foster creativity and drive groundbreaking solutions.'
   },
   {
-    tag: 'Engineering',
     title: 'Advancing cybersecurity with next-gen solutions',
     description:
-      'Our next-generation cybersecurity solutions are setting new standards in the industry. Discover how we protect our clients from evolving cyber threats.',
-    authors: [
-      { name: 'Agnes Walker', avatar: '/static/images/avatar/4.jpg' },
-      { name: 'Trevor Henderson', avatar: '/static/images/avatar/5.jpg' },
-    ],
+      'Our next-generation cybersecurity solutions are setting new standards in the industry. Discover how we protect our clients from evolving cyber threats.'
   },
   {
-    tag: 'Product',
     title: 'Enhancing customer experience through innovation',
     description:
-      'Our innovative approaches are enhancing customer experience. Learn about the new features and improvements that are delighting our users.',
-    authors: [{ name: 'Travis Howard', avatar: '/static/images/avatar/2.jpg' }],
+      'Our innovative approaches are enhancing customer experience. Learn about the new features and improvements that are delighting our users.'
   },
   {
-    tag: 'Engineering',
     title: 'Pioneering sustainable engineering solutions',
     description:
-      "Learn about our commitment to sustainability and the innovative engineering solutions we're implementing to create a greener future. Discover the impact of our eco-friendly initiatives.",
-    authors: [
-      { name: 'Agnes Walker', avatar: '/static/images/avatar/4.jpg' },
-      { name: 'Trevor Henderson', avatar: '/static/images/avatar/5.jpg' },
-    ],
+      "Learn about our commitment to sustainability and the innovative engineering solutions we're implementing to create a greener future. Discover the impact of our eco-friendly initiatives."
   },
   {
-    tag: 'Product',
     title: 'Maximizing efficiency with our latest product updates',
     description:
       'Our recent product updates are designed to help you maximize efficiency and achieve more. Get a detailed overview of the new features and improvements that can elevate your workflow.',
-    authors: [{ name: 'Travis Howard', avatar: '/static/images/avatar/2.jpg' }],
   },
   {
-    tag: 'Design',
     title: 'Designing for the future: trends and insights',
     description:
       'Stay ahead of the curve with the latest design trends and insights. Our design team shares their expertise on creating intuitive and visually stunning user experiences.',
-    authors: [{ name: 'Kate Morrison', avatar: '/static/images/avatar/7.jpg' }],
   },
   {
-    tag: 'Company',
     title: "Our company's journey: milestones and achievements",
     description:
       "Take a look at our company's journey and the milestones we've achieved along the way. From humble beginnings to industry leader, discover our story of growth and success.",
-    authors: [{ name: 'Cindy Baker', avatar: '/static/images/avatar/3.jpg' }],
   },
 ];
 
@@ -135,43 +107,12 @@ const TitleTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 
-function Author({ authors }: { authors: { name: string; avatar: string }[] }) {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 2,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      <Box
-        sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
-      >
-        <AvatarGroup max={3}>
-          {authors.map((author, index) => (
-            <Avatar
-              key={index}
-              alt={author.name}
-              src={author.avatar}
-              sx={{ width: 24, height: 24 }}
-            />
-          ))}
-        </AvatarGroup>
-        <Typography variant="caption">
-          {authors.map((author) => author.name).join(', ')}
-        </Typography>
-      </Box>
-      <Typography variant="caption">July 14, 2021</Typography>
-    </Box>
-  );
-}
-
 export default function Latest() {
   const [focusedCardIndex, setFocusedCardIndex] = React.useState<number | null>(
     null,
   );
+
+  const [articleInfo, setArticleInfo] = React.useState<any[]>(articleInfoBkp)
 
   const handleFocus = (index: number) => {
     setFocusedCardIndex(index);
@@ -180,6 +121,11 @@ export default function Latest() {
   const handleBlur = () => {
     setFocusedCardIndex(null);
   };
+
+  React.useEffect( () => {
+    bloggerInstance.get("")
+    .then((response : AxiosResponse) => setArticleInfo(response.data.items))
+  })
 
   return (
     <div>
@@ -198,9 +144,7 @@ export default function Latest() {
                 height: '100%',
               }}
             >
-              <Typography gutterBottom variant="caption" component="div">
-                {article.tag}
-              </Typography>
+
               <TitleTypography
                 gutterBottom
                 variant="h6"
@@ -219,7 +163,7 @@ export default function Latest() {
                 {article.description}
               </StyledTypography>
 
-              <Author authors={article.authors} />
+              <Typography variant="caption">{article.updated ?? "July 14, 2021"}</Typography>
             </Box>
           </Grid>
         ))}
