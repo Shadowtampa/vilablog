@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 const cardData = [
   {
     img: 'https://picsum.photos/800/450?random=1',
-    tag: 'Engineering',
+    tag: 'About',
     title: 'Revolutionizing software development with cutting-edge tools',
     description:
       'Our latest engineering tools are designed to streamline workflows and boost productivity. Discover how these innovations are transforming the software development landscape.',
