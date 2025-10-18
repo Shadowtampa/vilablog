@@ -1,5 +1,5 @@
-import Blog from "./blog/Blog"
 import './i18n/config';
+import Blog from './pages/blog/Blog';
 
 const App = () => {
   return (

@@ -11,9 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
-import { LanguageModeIconDropdown } from "../../shared-theme/LanguageModeIconDropdown";
 import { useTranslation } from "react-i18next";
+import { LanguageModeIconDropdown } from "./shared-theme/LanguageModeIconDropdown";
+import ColorModeIconDropdown from "./shared-theme/ColorModeIconDropdown";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
